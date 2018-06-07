@@ -16,7 +16,9 @@ pipeline {
     stage('Push To Docker') {
       steps {
           withDockerRegistry([credentialsId: "dockerhub",  url: "" ]){
-              powershell(returnStatus: true, script: '.\\push.ps1', returnStdout: true)
+              dir(path: '5.7') {
+                powershell(returnStatus: true, script: '.\\push.ps1', returnStdout: true)
+              }
           }
         
       }
