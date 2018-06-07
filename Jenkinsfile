@@ -1,7 +1,7 @@
 pipeline {
   agent any
-  stages {
-      node {
+  node {
+    stages {
             def unifiImage
             stage('Build') {
                 steps {
