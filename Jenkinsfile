@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         dir(path: '5.7') {
-          powershell(returnStatus: true, script: '.\\build.ps1', returnStdout: true)
+          powershell '.\\build.ps1'
         }
 
       }
