@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                powershell  returnStatus: true, script: '.\\build.ps1'
+                powershell  returnStatus: true, script: '.\\5.7\build.ps1'
             }
         }
         stage('Test') {
@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Push To Docker') {
             steps {
-                powershell  returnStatus: true, script: '.\\push-docker.ps1'
+                powershell  returnStatus: true, script: '.\\5.7\push-docker.ps1'
             }
         }
     }
