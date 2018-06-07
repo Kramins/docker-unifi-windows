@@ -1,3 +1,5 @@
+$ErrorActionPreference = "Stop"
+
 $UNIFI_VERSION = "5.7.23"
 
 $imageFullName = ("kramins/unifi:{0}-windowsservercore" -f $UNIFI_VERSION)
