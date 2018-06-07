@@ -1,23 +1,13 @@
-$UNIFI_VERSION = "5.7.20"
+. .\build.config.ps1
 
-#docker push  -t ("kramins/unifi:{0}-windowsservercore" -f $UNIFI_VERSION)
-#docker push kramins/unifi
+$UNIFI_VERSION = $env:DOCKER_APPLICATION_VERSION
 
-$dockerOutput = docker images --format "{{.ID}},{{.Repository}},{{.Tag}},{{.CreatedAt}}" kramins/unifi
+$imageFullName = ("{0}/{1}:{2}-windowsservercore" -f $env:DOCKER_REPO, $env:DOCKER_IMAGE, $UNIFI_VERSION)
+$imageLatestName = ("{0}/{1}:latest" -f $env:DOCKER_REPO, $env:DOCKER_IMAGE)
 
 
-$repos = @()
-$dockerOutput | ForEach-Object {
-    $csv = $_.Split(",")
-    $data = @{}
-    $data.Id = $csv[0]
-    $data.Repository = $csv[1]
-    $data.Tag = $csv[2]
-    $data.CreatedAt = $csv[3]
+Write-Host `Building $imageFullName`
+docker push $imageFullName
 
-    $repos+= $data
-}
-
-$repos | ForEach-Object {
-    docker push ("{0}:{1}" -f $_.Repository, $_.Tag)
-}
+Write-Host "Tagging image as latest"
+docker push $imageLatestName

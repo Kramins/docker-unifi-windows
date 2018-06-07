@@ -1,5 +1,5 @@
 $ErrorActionPreference = "Stop"
-. ./build.config.ps1
+. .\build.config.ps1
 
 $UNIFI_VERSION = $env:DOCKER_APPLICATION_VERSION
 
