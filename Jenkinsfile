@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         dir(path: '5.7') {
-          powershell(returnStatus: true, script: '.\\build.ps1', returnStdout: true)
+          powershell(returnStatus: true, script: '.\\build.ps1')
         }
       }
     }
@@ -14,10 +14,13 @@ pipeline {
       }
     }
     stage('Push To Docker') {
+      when {
+        branch 'master'
+      }
       steps {
           withDockerRegistry([credentialsId: "dockerhub",  url: "" ]){
               dir(path: '5.7') {
-                powershell(returnStatus: true, script: '.\\push.ps1', returnStdout: true)
+                powershell(returnStatus: true, script: '.\\push.ps1')
               }
           }
         
