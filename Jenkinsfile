@@ -12,8 +12,7 @@ pipeline {
           node {
             echo 'test'
             powershell(returnStatus: true, script: '.\\build.config.ps1', returnStdout: true)
-            imageName = "${env.DOCKER_IMAGE}:${env.DOCKER_APPLICATION_VERSION}"
-            unifiImage = docker.build(imageName, "--build-arg UNIFI_VERSION=${env.DOCKER_APPLICATION_VERSION}")
+            unifiImage = docker.build("${env.DOCKER_IMAGE}:${env.DOCKER_APPLICATION_VERSION}", "--build-arg UNIFI_VERSION=${env.DOCKER_APPLICATION_VERSION}")
           }
         }
       }
