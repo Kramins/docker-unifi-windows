@@ -9,11 +9,9 @@ pipeline {
     stage('Build') {
       steps {
         dir(path: '5.7') {
-          node {
-            echo 'test'
-            powershell(returnStatus: true, script: '.\\build.config.ps1', returnStdout: true)
-            unifiImage = docker.build("${env.DOCKER_IMAGE}:${env.DOCKER_APPLICATION_VERSION}", "--build-arg UNIFI_VERSION=${env.DOCKER_APPLICATION_VERSION}")
-          }
+          echo 'test'
+          powershell(returnStatus: true, script: '.\\build.config.ps1', returnStdout: true)
+          unifiImage = docker.build("${env.DOCKER_IMAGE}:${env.DOCKER_APPLICATION_VERSION}", "--build-arg UNIFI_VERSION=${env.DOCKER_APPLICATION_VERSION}")
         }
       }
     }
