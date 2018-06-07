@@ -1,7 +1,6 @@
 pipeline {
   agent any
     stages {
-        def unifiImage
         stage('Build') {
             steps {
                 dir(path: '5.7') {
